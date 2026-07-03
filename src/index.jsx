@@ -2,7 +2,6 @@ import messages_en from "./translations/en.json";
 import ClaimGuardPanel from "./components/ClaimGuardPanel";
 import ClaimGuardAboutPage from "./pages/ClaimGuardAboutPage";
 import ClaimGuardHomeCard from "./components/ClaimGuardHomeCard";
-import { claimGuardSelectionAction } from "./actions/claimGuardSelectionAction";
 
 const ROUTE_ABOUT = "claimguard/about";
 
@@ -24,19 +23,18 @@ const ROUTE_ABOUT = "claimguard/about";
 //   3. "home.HomePage.Blocks" -- an array openimis-fe-home_js's
 //      HomePageContainer renders on the post-login landing page, right
 //      after the "Welcome <name>" heading.
-//   4. "claim.SelectionAction" -- a generic Searcher-level extension point
-//      (fe-core, not claim-module-specific) for toolbar buttons that act on
-//      the claims list's row selection, same key the claim module's own
-//      "Submit all"/"Delete selected" buttons use. Lets a reviewer select
-//      one claim on the claims list and jump straight to its ClaimGuard
-//      analysis, without needing a fork of openimis-fe-claim_js (that
-//      module's per-row cell rendering has no extension point at all).
+//
+// NOTE: a "claim.SelectionAction" contribution (a toolbar button on the
+// claims list) was tried and removed -- fe-core renders contributions
+// under that key differently than the plain {label, enabled, action}
+// objects the claim module passes via its own `actions` prop, and a plain
+// object there white-screened the claims list page. The claim-detail panel
+// (#1) already provides the "Run AI Analysis" button, so this cost nothing.
 const DEFAULT_CONFIG = {
   translations: [{ key: "en", messages: messages_en }],
   refs: [{ key: "claimguard.route.about", ref: ROUTE_ABOUT }],
   "claim.MasterPanel": [ClaimGuardPanel],
   "home.HomePage.Blocks": [ClaimGuardHomeCard],
-  "claim.SelectionAction": [claimGuardSelectionAction],
   "core.Router": [
     {
       path: ROUTE_ABOUT,
