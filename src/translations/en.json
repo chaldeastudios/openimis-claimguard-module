@@ -1,0 +1,21 @@
+{
+  "claimguard": {
+    "mainMenu": "ClaimGuard",
+    "menu": {
+      "about": "About ClaimGuard"
+    },
+    "about": {
+      "page": {
+        "title": "ClaimGuard"
+      },
+      "title": "ClaimGuard fraud review",
+      "body": "ClaimGuard scores every submitted claim for fraud risk and surfaces plain-language reasons to a human reviewer before payment. Open a claim in the Claims module to link it directly to its ClaimGuard risk review, or open the reviewer dashboard below.",
+      "openDashboard": "Open ClaimGuard dashboard"
+    },
+    "ClaimGuardPanel": {
+      "title": "ClaimGuard fraud review",
+      "openInClaimGuard": "Open in ClaimGuard",
+      "runAiAnalysis": "Run AI Analysis in ClaimGuard"
+    }
+  }
+}
