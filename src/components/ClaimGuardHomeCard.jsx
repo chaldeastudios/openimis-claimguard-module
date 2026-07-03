@@ -24,10 +24,10 @@ function ClaimGuardHomeCard({ modulesManager }) {
     <Grid size={12}>
       <Paper style={{ padding: 24, marginTop: 16 }}>
         <Typography variant="h6">
-          <FormattedMessage module="claimguard" id="claimguard.home.title" />
+          <FormattedMessage module="claimguard" id="home.title" />
         </Typography>
         <Typography variant="body2" style={{ marginTop: 8, maxWidth: 640 }}>
-          <FormattedMessage module="claimguard" id="claimguard.home.body" />
+          <FormattedMessage module="claimguard" id="home.body" />
         </Typography>
         <Button
           variant="contained"
@@ -38,10 +38,7 @@ function ClaimGuardHomeCard({ modulesManager }) {
             window.open(`${baseUrl}/dashboard`, "_blank", "noopener,noreferrer")
           }
         >
-          <FormattedMessage
-            module="claimguard"
-            id="claimguard.home.openDashboard"
-          />
+          <FormattedMessage module="claimguard" id="home.openDashboard" />
         </Button>
       </Paper>
     </Grid>

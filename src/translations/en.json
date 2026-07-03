@@ -1,26 +1,14 @@
 {
-  "claimguard": {
-    "mainMenu": "ClaimGuard",
-    "menu": {
-      "about": "About ClaimGuard"
-    },
-    "about": {
-      "page": {
-        "title": "ClaimGuard"
-      },
-      "title": "ClaimGuard fraud review",
-      "body": "ClaimGuard scores every submitted claim for fraud risk and surfaces plain-language reasons to a human reviewer before payment. Open a claim in the Claims module to link it directly to its ClaimGuard risk review, or open the reviewer dashboard below.",
-      "openDashboard": "Open ClaimGuard dashboard"
-    },
-    "ClaimGuardPanel": {
-      "title": "ClaimGuard fraud review",
-      "openInClaimGuard": "Open in ClaimGuard",
-      "runAiAnalysis": "Run AI Analysis in ClaimGuard"
-    },
-    "home": {
-      "title": "ClaimGuard fraud review",
-      "body": "Every claim submitted here can be scored for fraud risk in ClaimGuard, the companion reviewer dashboard -- open a claim to link it directly, or select one on the Claims list and use \"Get AI Analysis (ClaimGuard)\".",
-      "openDashboard": "Open ClaimGuard dashboard"
-    }
-  }
+  "claimguard.mainMenu": "ClaimGuard",
+  "claimguard.menu.about": "About ClaimGuard",
+  "claimguard.about.page.title": "ClaimGuard",
+  "claimguard.about.title": "ClaimGuard fraud review",
+  "claimguard.about.body": "ClaimGuard scores every submitted claim for fraud risk and surfaces plain-language reasons to a human reviewer before payment. Open a claim in the Claims module to link it directly to its ClaimGuard risk review, or open the reviewer dashboard below.",
+  "claimguard.about.openDashboard": "Open ClaimGuard dashboard",
+  "claimguard.ClaimGuardPanel.title": "ClaimGuard fraud review",
+  "claimguard.ClaimGuardPanel.openInClaimGuard": "Open in ClaimGuard",
+  "claimguard.ClaimGuardPanel.runAiAnalysis": "Run AI Analysis in ClaimGuard",
+  "claimguard.home.title": "ClaimGuard — AI fraud review for claims",
+  "claimguard.home.body": "Every claim submitted into openIMIS can be scored for fraud risk by ClaimGuard, the companion reviewer dashboard. ClaimGuard flags amount anomalies, near-duplicate claims, cross-facility patient patterns, and provider outliers — with plain-language reasons — so a human reviewer can act before payment is released. Open a claim's detail page and use the ClaimGuard panel to link it directly, select a claim on the Claims list and choose \"Get AI Analysis (ClaimGuard)\", or open the full reviewer dashboard below.",
+  "claimguard.home.openDashboard": "Open ClaimGuard dashboard"
 }

@@ -24,15 +24,13 @@ function ClaimGuardAboutPage({ modulesManager, intl }) {
 
   return (
     <div className="page">
-      <Helmet
-        title={formatMessage(intl, "claimguard", "claimguard.about.page.title")}
-      />
+      <Helmet title={formatMessage(intl, "claimguard", "about.page.title")} />
       <Paper style={{ padding: 24, maxWidth: 640 }}>
         <Typography variant="h5">
-          <FormattedMessage module="claimguard" id="claimguard.about.title" />
+          <FormattedMessage module="claimguard" id="about.title" />
         </Typography>
         <Typography variant="body1" style={{ marginTop: 16 }}>
-          <FormattedMessage module="claimguard" id="claimguard.about.body" />
+          <FormattedMessage module="claimguard" id="about.body" />
         </Typography>
         <Box style={{ marginTop: 24 }}>
           <Button
@@ -46,10 +44,7 @@ function ClaimGuardAboutPage({ modulesManager, intl }) {
               )
             }
           >
-            <FormattedMessage
-              module="claimguard"
-              id="claimguard.about.openDashboard"
-            />
+            <FormattedMessage module="claimguard" id="about.openDashboard" />
           </Button>
         </Box>
       </Paper>
