@@ -16,6 +16,11 @@
       "title": "ClaimGuard fraud review",
       "openInClaimGuard": "Open in ClaimGuard",
       "runAiAnalysis": "Run AI Analysis in ClaimGuard"
+    },
+    "home": {
+      "title": "ClaimGuard fraud review",
+      "body": "Every claim submitted here can be scored for fraud risk in ClaimGuard, the companion reviewer dashboard -- open a claim to link it directly, or select one on the Claims list and use \"Get AI Analysis (ClaimGuard)\".",
+      "openDashboard": "Open ClaimGuard dashboard"
     }
   }
 }

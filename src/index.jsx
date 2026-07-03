@@ -1,6 +1,8 @@
 import messages_en from "./translations/en.json";
 import ClaimGuardPanel from "./components/ClaimGuardPanel";
 import ClaimGuardAboutPage from "./pages/ClaimGuardAboutPage";
+import ClaimGuardHomeCard from "./components/ClaimGuardHomeCard";
+import { claimGuardSelectionAction } from "./actions/claimGuardSelectionAction";
 
 const ROUTE_ABOUT = "claimguard/about";
 
@@ -9,7 +11,7 @@ const ROUTE_ABOUT = "claimguard/about";
 // manager -- see chaldeastudios/openimis-fe_js (this repo's sibling) and
 // the reference openimis-fe-claim_js module this mirrors.
 //
-// Two integration points:
+// Four integration points:
 //   1. "claim.MasterPanel" -- an extension array the claim module itself
 //      renders on every claim's detail/edit page (see ClaimMasterPanel.jsx
 //      in openimis-fe-claim_js), passing the loaded `claim` (uuid, code,
@@ -19,10 +21,22 @@ const ROUTE_ABOUT = "claimguard/about";
 //      page, satisfying the hackathon's "at least one meaningful page
 //      accessible from the openIMIS navigation menu" requirement on its
 //      own, independent of the claim panel injection.
+//   3. "home.HomePage.Blocks" -- an array openimis-fe-home_js's
+//      HomePageContainer renders on the post-login landing page, right
+//      after the "Welcome <name>" heading.
+//   4. "claim.SelectionAction" -- a generic Searcher-level extension point
+//      (fe-core, not claim-module-specific) for toolbar buttons that act on
+//      the claims list's row selection, same key the claim module's own
+//      "Submit all"/"Delete selected" buttons use. Lets a reviewer select
+//      one claim on the claims list and jump straight to its ClaimGuard
+//      analysis, without needing a fork of openimis-fe-claim_js (that
+//      module's per-row cell rendering has no extension point at all).
 const DEFAULT_CONFIG = {
   translations: [{ key: "en", messages: messages_en }],
   refs: [{ key: "claimguard.route.about", ref: ROUTE_ABOUT }],
   "claim.MasterPanel": [ClaimGuardPanel],
+  "home.HomePage.Blocks": [ClaimGuardHomeCard],
+  "claim.SelectionAction": [claimGuardSelectionAction],
   "core.Router": [
     {
       path: ROUTE_ABOUT,
