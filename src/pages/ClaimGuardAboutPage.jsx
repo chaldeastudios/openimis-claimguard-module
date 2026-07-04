@@ -7,11 +7,9 @@ import {
   withModulesManager,
   formatMessage,
 } from "@openimis/fe-core";
+import { CLAIMGUARD_BASE_URL } from "../config";
 
 const MODULE_NAME = "fe-claimguard";
-// Both openIMIS and ClaimGuard run locally on the same machine for this
-// demo, so this points straight at ClaimGuard's local dev port.
-const DEFAULT_BASE_URL = "http://localhost:5173";
 
 // The module's own page, registered on the main nav menu (see ../index.jsx)
 // -- satisfies the "at least one meaningful page accessible from the
@@ -21,7 +19,7 @@ function ClaimGuardAboutPage({ modulesManager, intl }) {
   const baseUrl = modulesManager.getConf(
     MODULE_NAME,
     "claimguardBaseUrl",
-    DEFAULT_BASE_URL
+    CLAIMGUARD_BASE_URL
   );
 
   return (

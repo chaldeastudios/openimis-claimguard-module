@@ -3,11 +3,9 @@ import { injectIntl } from "react-intl";
 import { Grid, Paper, Typography, Button, Chip, CircularProgress } from "@mui/material";
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 import { FormattedMessage, withModulesManager } from "@openimis/fe-core";
+import { CLAIMGUARD_BASE_URL } from "../config";
 
 const MODULE_NAME = "fe-claimguard";
-// Both openIMIS and ClaimGuard run locally on the same machine for this
-// demo, so this points straight at ClaimGuard's local dev port.
-const DEFAULT_BASE_URL = "http://localhost:5173";
 
 const RISK_COLORS = { High: "#c0392b", Medium: "#c8791f", Low: "#5a7d4b" };
 
@@ -42,27 +40,36 @@ function ClaimGuardHomeCard({ modulesManager }) {
   const baseUrl = modulesManager.getConf(
     MODULE_NAME,
     "claimguardBaseUrl",
-    DEFAULT_BASE_URL
+    CLAIMGUARD_BASE_URL
   );
-  const [state, setState] = useState({ loading: true, error: false, data: null });
+  const summaryUrl = `${baseUrl}/api/claimguard-summary`;
+  const [state, setState] = useState({ loading: true, error: null, data: null });
 
   useEffect(() => {
     let cancelled = false;
-    fetch(`${baseUrl}/api/claimguard-summary`)
+    setState({ loading: true, error: null, data: null });
+    fetch(summaryUrl)
       .then((res) => {
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        if (!res.ok) throw new Error(`HTTP ${res.status} ${res.statusText}`);
         return res.json();
       })
       .then((data) => {
-        if (!cancelled) setState({ loading: false, error: false, data });
+        if (!cancelled) setState({ loading: false, error: null, data });
       })
-      .catch(() => {
-        if (!cancelled) setState({ loading: false, error: true, data: null });
+      .catch((err) => {
+        // TypeError with no HTTP status means the request never reached a
+        // server at all (wrong port/host, dashboard not running, or a CORS
+        // rejection) -- worth telling apart from a real HTTP error status.
+        const detail =
+          err instanceof TypeError
+            ? `${err.message} -- likely means nothing is listening at that URL, or a CORS rejection.`
+            : err.message;
+        if (!cancelled) setState({ loading: false, error: detail, data: null });
       });
     return () => {
       cancelled = true;
     };
-  }, [baseUrl]);
+  }, [summaryUrl]);
 
   return (
     <Grid size={12}>
@@ -106,9 +113,31 @@ function ClaimGuardHomeCard({ modulesManager }) {
         )}
 
         {state.error && (
-          <Typography variant="body2" color="error" style={{ marginTop: 24 }}>
-            <FormattedMessage module="claimguard" id="home.loadError" />
-          </Typography>
+          <>
+            <Typography variant="body2" color="error" style={{ marginTop: 24 }}>
+              <FormattedMessage module="claimguard" id="home.loadError" />
+            </Typography>
+            {/* TEMP DEBUG -- remove this block once the connection is confirmed working.
+                Shows exactly what URL was tried and the raw fetch error, so a wrong
+                port/host, a dashboard that isn't running, and a CORS rejection are
+                distinguishable instead of all collapsing into one generic message. */}
+            <div
+              style={{
+                marginTop: 8,
+                padding: 12,
+                border: "1px dashed #c0392b",
+                borderRadius: 6,
+                fontFamily: "monospace",
+                fontSize: 12,
+                whiteSpace: "pre-wrap",
+                wordBreak: "break-all",
+              }}
+            >
+              [TEMP DEBUG] tried: {summaryUrl}
+              {"\n"}
+              [TEMP DEBUG] error: {state.error}
+            </div>
+          </>
         )}
 
         {state.data && (

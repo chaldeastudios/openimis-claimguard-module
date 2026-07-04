@@ -7,12 +7,9 @@ import {
   withModulesManager,
   GRID_RESPONSIVE_STANDARD,
 } from "@openimis/fe-core";
+import { CLAIMGUARD_BASE_URL } from "../config";
 
 const MODULE_NAME = "fe-claimguard";
-// Overridable via this module's cfg block (see README). Both openIMIS and
-// ClaimGuard run locally on the same machine for this demo, so this points
-// straight at ClaimGuard's local dev port rather than a hosted domain.
-const DEFAULT_BASE_URL = "http://localhost:5173";
 
 // Rendered inside the claim detail page via the "claim.MasterPanel"
 // contribution point (see ../index.jsx and openimis-fe-claim_js's
@@ -27,7 +24,7 @@ function ClaimGuardPanel({ claim, modulesManager, intl }) {
   const baseUrl = modulesManager.getConf(
     MODULE_NAME,
     "claimguardBaseUrl",
-    DEFAULT_BASE_URL
+    CLAIMGUARD_BASE_URL
   );
   const claimUrl = `${baseUrl}/dashboard/claims/${claim.uuid}`;
 
