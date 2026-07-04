@@ -9,9 +9,10 @@ import {
 } from "@openimis/fe-core";
 
 const MODULE_NAME = "fe-claimguard";
-// Overridable via this module's cfg block (see README) -- defaults to a
-// placeholder demo domain until ClaimGuard has a real deployed URL.
-const DEFAULT_BASE_URL = "https://claimguard.demo";
+// Overridable via this module's cfg block (see README). Both openIMIS and
+// ClaimGuard run locally on the same machine for this demo, so this points
+// straight at ClaimGuard's local dev port rather than a hosted domain.
+const DEFAULT_BASE_URL = "http://localhost:5173";
 
 // Rendered inside the claim detail page via the "claim.MasterPanel"
 // contribution point (see ../index.jsx and openimis-fe-claim_js's
