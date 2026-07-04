@@ -56,15 +56,8 @@ function ClaimGuardHomeCard({ modulesManager }) {
       .then((data) => {
         if (!cancelled) setState({ loading: false, error: null, data });
       })
-      .catch((err) => {
-        // TypeError with no HTTP status means the request never reached a
-        // server at all (wrong port/host, dashboard not running, or a CORS
-        // rejection) -- worth telling apart from a real HTTP error status.
-        const detail =
-          err instanceof TypeError
-            ? `${err.message} -- likely means nothing is listening at that URL, or a CORS rejection.`
-            : err.message;
-        if (!cancelled) setState({ loading: false, error: detail, data: null });
+      .catch(() => {
+        if (!cancelled) setState({ loading: false, error: true, data: null });
       });
     return () => {
       cancelled = true;
@@ -85,7 +78,13 @@ function ClaimGuardHomeCard({ modulesManager }) {
         >
           <div style={{ maxWidth: 640 }}>
             <Typography variant="h6">
-              <FormattedMessage module="claimguard" id="home.title" />
+              {/* Title wording itself signals connection status -- no
+                  separate error banner, no need to wait for the stat
+                  tiles/list below to render to know whether it worked. */}
+              <FormattedMessage
+                module="claimguard"
+                id={state.error ? "home.titleError" : "home.title"}
+              />
             </Typography>
             <Typography variant="body2" style={{ marginTop: 8, opacity: 0.85 }}>
               <FormattedMessage module="claimguard" id="home.body" />
@@ -110,34 +109,6 @@ function ClaimGuardHomeCard({ modulesManager }) {
               <FormattedMessage module="claimguard" id="home.loading" />
             </Typography>
           </div>
-        )}
-
-        {state.error && (
-          <>
-            <Typography variant="body2" color="error" style={{ marginTop: 24 }}>
-              <FormattedMessage module="claimguard" id="home.loadError" />
-            </Typography>
-            {/* TEMP DEBUG -- remove this block once the connection is confirmed working.
-                Shows exactly what URL was tried and the raw fetch error, so a wrong
-                port/host, a dashboard that isn't running, and a CORS rejection are
-                distinguishable instead of all collapsing into one generic message. */}
-            <div
-              style={{
-                marginTop: 8,
-                padding: 12,
-                border: "1px dashed #c0392b",
-                borderRadius: 6,
-                fontFamily: "monospace",
-                fontSize: 12,
-                whiteSpace: "pre-wrap",
-                wordBreak: "break-all",
-              }}
-            >
-              [TEMP DEBUG] tried: {summaryUrl}
-              {"\n"}
-              [TEMP DEBUG] error: {state.error}
-            </div>
-          </>
         )}
 
         {state.data && (
