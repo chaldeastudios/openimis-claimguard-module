@@ -6,4 +6,4 @@
 // modulesManager.getConf(...) calls in the components below -- but for a
 // same-machine demo, editing this one constant and rebuilding is the
 // fastest path.
-export const CLAIMGUARD_BASE_URL = "http://localhost:3001";
+export const CLAIMGUARD_BASE_URL = "http://localhost:5173";
